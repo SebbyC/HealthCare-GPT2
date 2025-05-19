@@ -1,4 +1,4 @@
-Great. I’ll create a full implementation blueprint for a project called **HealthCare-GPT** that fine-tunes a lightweight GPT model (like nanoGPT) locally in Docker, uses OpenWebText pretraining as a base, supports high-risk patient classification, and can ingest `.csv`, `.md`, and `.txt` research content for interactive understanding.
+Full implementation blueprint for **HealthCare-GPT** that fine-tunes a lightweight GPT model (like nanoGPT) locally in Docker, uses OpenWebText pretraining as a base, supports high-risk patient classification, and can ingest `.csv`, `.md`, and `.txt` research content for interactive understanding.
 
 This will include:
 
