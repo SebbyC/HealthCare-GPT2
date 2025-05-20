@@ -1,0 +1,23 @@
+# Core dependencies
+torch>=2.0.0
+numpy>=1.20.0
+pandas>=1.4.0
+
+# Hugging Face Transformers and related
+transformers>=4.28.0
+datasets>=2.12.0
+tiktoken>=0.3.0
+
+# Training utilities
+tqdm>=4.65.0
+wandb>=0.15.0
+pyyaml>=6.0
+
+# Web interface
+flask>=2.3.0
+gradio>=3.30.0
+
+# Misc utilities
+matplotlib>=3.7.0
+seaborn>=0.12.0
+scikit-learn>=1.2.0

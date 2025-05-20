@@ -1,0 +1,71 @@
+version: '3.8'
+
+services:
+  # Main application service
+  healthcare-gpt:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: healthcare-gpt:latest
+    container_name: healthcare-gpt
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./HealthCareData:/app/HealthCareData
+      - ./processed:/app/processed
+      - ./models:/app/models
+      - ./docs:/app/docs
+    environment:
+      - PYTHONUNBUFFERED=1
+    command: python scripts/serve.py
+    restart: unless-stopped
+
+  # Optional service for data preprocessing
+  data-curator:
+    image: healthcare-gpt:latest
+    container_name: healthcare-gpt-curator
+    volumes:
+      - ./HealthCareData:/app/HealthCareData
+      - ./processed:/app/processed
+      - ./docs:/app/docs
+    command: python scripts/preprocess.py
+    profiles:
+      - data
+    depends_on:
+      - healthcare-gpt
+
+  # Optional service for model training
+  trainer:
+    image: healthcare-gpt:latest
+    container_name: healthcare-gpt-trainer
+    volumes:
+      - ./HealthCareData:/app/HealthCareData
+      - ./processed:/app/processed
+      - ./models:/app/models
+      - ./docs:/app/docs
+    command: python scripts/finetune.py
+    profiles:
+      - train
+    depends_on:
+      - healthcare-gpt
+
+  # Optional service for model evaluation
+  evaluator:
+    image: healthcare-gpt:latest
+    container_name: healthcare-gpt-evaluator
+    volumes:
+      - ./HealthCareData:/app/HealthCareData
+      - ./processed:/app/processed
+      - ./models:/app/models
+      - ./docs:/app/docs
+    command: python scripts/evaluate.py
+    profiles:
+      - eval
+    depends_on:
+      - healthcare-gpt
+
+# To run specific services, use:
+# docker-compose --profile data up -d  # Run data curator
+# docker-compose --profile train up -d  # Run trainer
+# docker-compose --profile eval up -d   # Run evaluator
+# docker-compose up -d  # Run just the main service
