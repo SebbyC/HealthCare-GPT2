@@ -2,7 +2,6 @@
 
 *A lightweight, end‑to‑end framework for fine‑tuning a GPT‑2‑style model on healthcare data — fully runnable on a single PC with optional Docker.*
 
-![healthcare‑gpt-banner](docs/assets/banner.png)
 
 ---
 
